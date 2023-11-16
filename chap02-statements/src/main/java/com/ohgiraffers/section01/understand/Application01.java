@@ -1,4 +1,4 @@
-package com.ohgiraffers.understand;
+package com.ohgiraffers.section01.understand;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,12 +18,12 @@ public class Application01 {
         try {
             stmt = con.createStatement(); //con의 Statement를 만들어준다
             System.out.println("employee 테이블에서 급여를 가장 많이 받는 사원의 사번, 이름, 전화번호를 출력하세요");
-            String query= "SElECT " + // 선택
-                    "EMP_ID, " + // EMP_ID와
-                    "EMP_NAME, " + // EMP_NAME과
-                    "PHONE " + // PHONE을
-                    " FROM EMPLOYEE" + // EMPLOYEE 테이블에서
-                    " SALARY LIMIT 1"; // SALARY에서 가장 높은 1개를
+            String query= "SElECT " +
+                    "EMP_ID, " +
+                    "EMP_NAME, " +
+                    "PHONE " +
+                    " FROM EMPLOYEE" +
+                    " SALARY LIMIT 1";
             rset = stmt.executeQuery(query); // query를 실행시킨다
             while(rset.next()){ // 조건 : rset의 다음이 있을때
                 System.out.println(rset.getString("EMP_ID") + " " + rset.getString("EMP_NAME")
