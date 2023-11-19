@@ -1,7 +1,9 @@
 package com.ohgiraffers.restaurant.view;
 
 import com.ohgiraffers.restaurant.controller.MenuCtr;
+import com.ohgiraffers.restaurant.model.delete.MenuDelete;
 import com.ohgiraffers.restaurant.model.dto.MenuDTO;
+import com.ohgiraffers.restaurant.model.update.MenuUpdate;
 import com.ohgiraffers.restaurant.model.vo.MenuVo;
 import com.ohgiraffers.restaurant.service.MenuService;
 
@@ -30,12 +32,14 @@ public class MenuView {
                 //2-1 : 메뉴 조회
                 case 1 : viewMenu(menuCnt.findAllMenu()); break;
                 //2-2 : 메뉴 수정
-                case 2 : break;
+                case 2 :
+                    System.out.println(menuCnt.modifyMenu(modifyMenu()));break;
                 //2-3 : 메뉴 등록
                 case 3 :
                     System.out.println(menuCnt.registMenu(registMenu())); break;
                 //2-4 : 메뉴 삭제
-                case 4 : break;
+                case 4 :
+                    System.out.println(menuCnt.deleteMenu(deleteMenu())); break;
                 //default : 프로그램 종료
                 default: break 프로그램종료;
             }
@@ -73,5 +77,35 @@ public class MenuView {
 
         // 일반적으로 front에서 js를 이용하여 1차 유효성 검사를 진행한다.
         return newMenu;
+    }
+
+    public static MenuUpdate modifyMenu(){
+        MenuUpdate menuUpdate = new MenuUpdate();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("===================");
+        System.out.println();
+        System.out.print("수정하고 싶은 메뉴 이름을 입력 : ");
+        menuUpdate.setChangeName(scanner.nextLine());
+        System.out.println("변경할 이름 입력 : ");
+        menuUpdate.setMenuName(scanner.nextLine());
+        System.out.println("변경할 가격 입력 : ");
+        menuUpdate.setPrice(scanner.nextInt());
+        scanner.nextLine();
+        System.out.println("변경할 카테고리 입력 : ");
+        menuUpdate.setCategory(scanner.nextLine());
+        System.out.println("변경할 스테이터스 입력 : ");
+        menuUpdate.setStatus(scanner.nextLine());
+
+        return menuUpdate;
+    }
+    public static MenuDelete deleteMenu(){
+        MenuDelete menuDelete = new MenuDelete();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("========================");
+        System.out.println();
+        System.out.print("삭제할 메뉴 이름 입력 : ");
+        menuDelete.setMenuName(scanner.nextLine());
+
+        return menuDelete;
     }
 }

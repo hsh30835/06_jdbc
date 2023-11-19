@@ -1,6 +1,8 @@
 package com.ohgiraffers.restaurant.controller;
 
+import com.ohgiraffers.restaurant.model.delete.MenuDelete;
 import com.ohgiraffers.restaurant.model.dto.MenuDTO;
+import com.ohgiraffers.restaurant.model.update.MenuUpdate;
 import com.ohgiraffers.restaurant.model.vo.MenuVo;
 import com.ohgiraffers.restaurant.service.MenuService;
 
@@ -28,9 +30,29 @@ public class MenuCtr {
         return list;
     }
 
-    public int modifyMenu(int code){ //수정
-        System.out.println("modify code : " + code);
-        return 0;
+    public String modifyMenu(MenuUpdate menuUpdate){ //수정
+        if(Objects.isNull(menuUpdate)){ // 정보자체가 없을 시
+            return "정보가 존재하지 않아 입력해야됨";
+        }
+        if(menuUpdate.getChangeName()==null || menuUpdate.getChangeName().equals("")){ // 메뉴이름을 아예 안적을시
+            return "메뉴이름 등록";
+        }
+        if(menuUpdate.getPrice() <= 0){ //가격을 0원 이하로 입력할시
+            return "가격은 양수만 가능";
+        }
+        if(menuUpdate.getCategory()==null || menuUpdate.getCategory().equals("")){ //카테고리가 없거나 빈칸으로 할시
+            return "카테고리 필수";
+        }
+        if(menuUpdate.getStatus()==null || menuUpdate.getStatus().equals("")){
+            return "스테이터스 필수";
+        }
+        int result = menuService.modifyMenu(menuUpdate);
+
+        if(result<=0){
+            return "수정중 오류가 발생됨";
+        }else {
+            return "수정완료";
+        }
     }
 
     public String registMenu(MenuDTO menuDTO){ //등록
@@ -59,8 +81,20 @@ public class MenuCtr {
         }
     }
 
-    public int deleteMenu(int code){ //삭제
-        System.out.println("code : " + code);
-        return 0;
+    public String deleteMenu(MenuDelete menuDelete){ //삭제
+        if(Objects.isNull(menuDelete)){
+            return "정보가 존재하지 않아 입력해야됨";
+        }
+        if(menuDelete.getMenuName()==null || menuDelete.getMenuName().equals("")){
+            return "메뉴이름 등록";
+        }
+        int result = menuService.deleteMenu(menuDelete);
+        System.out.println(result);
+
+        if(result<=0){
+            return "삭제중 오류가 발생됨";
+        }else {
+            return "삭제완료";
+        }
     }
 }

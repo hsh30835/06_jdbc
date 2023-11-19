@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <entry key="findAllMenu">
+    <entry key="findAllUser">
         SELECT
         *
-        FROM TBL_MENU;
+        FROM TBL_ALLUSER;
     </entry>
 </properties>

@@ -1,6 +1,8 @@
 package com.ohgiraffers.restaurant.model.dao;
 
+import com.ohgiraffers.restaurant.model.delete.MenuDelete;
 import com.ohgiraffers.restaurant.model.dto.MenuDTO;
+import com.ohgiraffers.restaurant.model.update.MenuUpdate;
 import com.ohgiraffers.restaurant.model.vo.MenuVo;
 import static com.ohgiraffers.restaurant.common.JDBCTemplate.*;
 import java.io.FileInputStream;
@@ -70,6 +72,26 @@ public class MenuDAO {
         return resultList;
     }
 
+    public List<String> findAllMenuName(Connection con) {
+        Statement stmt = null;
+        ResultSet rset = null;
+        List<String> resultList = new ArrayList<>();
+        try {
+            stmt = con.createStatement();
+            rset = stmt.executeQuery(prop.getProperty("findAllMenuName"));
+
+            while (rset.next()) {
+                resultList.add(rset.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(stmt);
+        }
+        return resultList;
+    }
+
     public int registMenu(Connection con, MenuDTO menuDTO) {
         PreparedStatement stmt = null;
         ResultSet rset = null;
@@ -80,6 +102,44 @@ public class MenuDAO {
             stmt.setInt(2,menuDTO.getPrice());
             stmt.setString(3, menuDTO.getCategory());
             stmt.setString(4, menuDTO.getStatus());
+
+            result = stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+        }
+        return result;
+    }
+
+    public int modifyMenu(Connection con, MenuUpdate menuUpdate) {
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int result = 0;
+        try {
+            stmt = con.prepareStatement(prop.getProperty("update"));
+            stmt.setString(5,menuUpdate.getChangeName());
+            stmt.setString(1,menuUpdate.getMenuName());
+            stmt.setInt(2,menuUpdate.getPrice());
+            stmt.setString(3, menuUpdate.getCategory());
+            stmt.setString(4, menuUpdate.getStatus());
+
+            result = stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+        }
+        return result;
+    }
+
+    public int deleteMenu(Connection con, MenuDelete menuDelete){
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int result = 0;
+        try {
+            stmt = con.prepareStatement(prop.getProperty("delete"));
+            stmt.setString(1,menuDelete.getMenuName());
 
             result = stmt.executeUpdate();
         } catch (SQLException e) {
