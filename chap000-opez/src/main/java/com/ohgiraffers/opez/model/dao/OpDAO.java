@@ -1,12 +1,12 @@
 package com.ohgiraffers.opez.model.dao;
+import com.ohgiraffers.opez.model.delete.OpDelete;
+import com.ohgiraffers.opez.model.dto.OpDTO;
+import com.ohgiraffers.opez.model.update.OpUpdate;
 import com.ohgiraffers.opez.model.vo.OpVO;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -45,5 +45,79 @@ public class OpDAO {
             close(stmt);
         }
         return resultList;
+    }
+    public List<String> findAllUserName(Connection con) {
+        Statement stmt = null;
+        ResultSet rset = null;
+        List<String> resultList = new ArrayList<>();
+        try {
+            stmt = con.createStatement();
+            rset = stmt.executeQuery(prop.getProperty("findAllUserName"));
+
+            while (rset.next()) {
+                resultList.add(rset.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(stmt);
+        }
+        return resultList;
+    }
+
+    public int registUser(Connection con, OpDTO opDTO) { //메뉴 등록
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int result = 0;
+        try {
+            stmt = con.prepareStatement(prop.getProperty("insertUser"));
+            stmt.setString(1,opDTO.getUserName());
+            stmt.setString(2,opDTO.getUserTier());
+
+            result = stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+        }
+        return result;
+    }
+
+    public int modifyUser(Connection con, OpUpdate opUpdate) { //메뉴 수정
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int result = 0;
+        try {
+            stmt = con.prepareStatement(prop.getProperty("updateUser"));
+            stmt.setString(3,opUpdate.getChangeName());
+            //5번부터 넣은 이유는 update 쿼리문에서 해당 이름이 같은 조건을 넣어서
+            stmt.setString(1,opUpdate.getUserName());
+            stmt.setString(2,opUpdate.getUserTier());
+
+            result = stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+        }
+        return result;
+    }
+
+    public int deleteUser(Connection con, OpDelete opDelete){
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int result = 0;
+        try {
+            stmt = con.prepareStatement(prop.getProperty("deleteUser"));
+            stmt.setString(1,opDelete.getUserName());
+
+            result = stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+        }
+        return result;
     }
 }

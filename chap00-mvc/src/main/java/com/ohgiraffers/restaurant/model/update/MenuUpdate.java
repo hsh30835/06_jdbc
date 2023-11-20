@@ -1,7 +1,7 @@
 package com.ohgiraffers.restaurant.model.update;
 
 public class MenuUpdate {
-    private String changeName;
+    private String changeName; // 수정할 대상의 이름
     private String menuName;
     private int price;
     private String category;

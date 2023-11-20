@@ -1,15 +1,25 @@
-package com.ohgiraffers.opez.model.dto;
+package com.ohgiraffers.opez.model.update;
 
-public class OpDTO {
+public class OpUpdate {
+    private String changeName;
     private String userName;
     private String userTier;
 
-    public OpDTO() {
+    public OpUpdate() {
     }
 
-    public OpDTO(String userName, String userTier) {
+    public OpUpdate(String changeName, String userName, String userTier) {
+        this.changeName = changeName;
         this.userName = userName;
         this.userTier = userTier;
+    }
+
+    public String getChangeName() {
+        return changeName;
+    }
+
+    public void setChangeName(String changeName) {
+        this.changeName = changeName;
     }
 
     public String getUserName() {
@@ -30,8 +40,9 @@ public class OpDTO {
 
     @Override
     public String toString() {
-        return "OpDTO{" +
-                "userName='" + userName + '\'' +
+        return "OpUpdate{" +
+                "changeName='" + changeName + '\'' +
+                ", userName='" + userName + '\'' +
                 ", userTier='" + userTier + '\'' +
                 '}';
     }

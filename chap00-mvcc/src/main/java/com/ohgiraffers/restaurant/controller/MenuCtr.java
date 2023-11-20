@@ -39,13 +39,12 @@ public class MenuCtr {
         //에러난거랑 값이 없는거랑은 달라서 이렇게 쓴다
     }
 
-    //수정과 삭제를 code로 한 이유는? 몇 번째 코드를 입력하면 그 코드에 해당하는 정보를 수정하거나 삭제하면 되니깐?
+    //수정과 삭제를 code로 한 이유는? 아직 만들어 놓기만 한거라 테스트를 위해?
     public int modifyMenu(int code){ //메뉴 수정
         System.out.println("modify code : " + code);
         return 0;
     }
 
-    // 등록을 MenuDTO로 한 이유는?
     public String registMenu(MenuDTO menuDTO){ //메뉴 등록
         if(Objects.isNull(menuDTO)){
             System.out.println("메뉴가 없네요");

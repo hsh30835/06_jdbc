@@ -41,9 +41,9 @@ public class OpVO {
         @Override
         public String toString() {
             return "OpVO{" +
-                    "userNumber=" + userNumber +
-                    ", userName='" + userName + '\'' +
-                    ", userTier='" + userTier + '\'' +
+                    "유저번호=" + userNumber +
+                    ", 유저닉네임='" + userName + '\'' +
+                    ", 유저티어='" + userTier + '\'' +
                     '}';
         }
     }

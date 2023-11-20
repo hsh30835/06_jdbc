@@ -6,4 +6,32 @@
         *
         FROM TBL_ALLUSER;
     </entry>
+    <entry key="findAllUserName">
+        SELECT
+            USER_NAME
+        FROM TBL_ALLUSER;
+    </entry>
+    <entry key="insertUser">
+        INSERT INTO TBL_ALLUSER(
+            USER_NUMBER,
+            USER_NAME,
+            USER_TIER
+        )VALUES(
+            NULL,
+            ?,
+            ?
+        )
+    </entry>
+    <entry key="updateUser">
+        UPDATE TBL_ALLUSER
+        SET
+            USER_NAME = ?,
+            USER_TIER = ?
+        WHERE USER_NAME = ?
+    </entry>
+    <entry key="deleteUser">
+        DELETE
+        FROM TBL_ALLUSER
+        WHERE USER_NAME = ?;
+    </entry>
 </properties>

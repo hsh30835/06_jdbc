@@ -17,7 +17,7 @@ public class JDBCTemplate {
             String driver = prop.getProperty("driver");// driver정보를 가져온다
             String url = prop.getProperty("url");// url정보를 가져온다
             con = DriverManager.getConnection(url,prop); //데이터베이스와의 연결을 수립한다
-        } catch (IOException e) { // 연결하는 과정에서 문제가 생길시 RuntimeException을 던진다
+            } catch (IOException e) { // 연결하는 과정에서 문제가 생길시 RuntimeException을 던진다
             throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);

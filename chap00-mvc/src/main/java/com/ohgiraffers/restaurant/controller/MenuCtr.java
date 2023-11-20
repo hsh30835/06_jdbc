@@ -15,12 +15,19 @@ import java.util.Objects;
 * 이후 service의 반환 값을 페이지로 반환한다.
 * */
 public class MenuCtr {
+    //MenuCtr은 리모콘 버튼
+    //리스트를 넘길 애를 찾음
+
+    //MenuView에서 사용자가 내린 명령을 처리한다
     private MenuService menuService;
     public MenuCtr(MenuService menuService){
         this.menuService = menuService;
     }
-    public List<MenuVo> findAllMenu(){ //조회
-        // 값을 확인한다.
+    public List<MenuVo> findAllMenu(){ //메뉴 전체를 조회한다
+        //작동하는 순서 3. 그럼 얘가 응답함 그뒤로 데이터를 받고 반환한다
+        //값을 확인한다 근데 지금 값이 없음
+        //System.out.println("메뉴 조회 테스트"); //단계별로 먼저 동작이 되나 확인하고 그 이후로 넘어가는게 나중에 좋음
+        //return null; //한번에 만들고 실행한담에 에러가 발생시 에러 찾기가 매우 어려워짐
         List<MenuVo> list = menuService.findMenu();
 
         // 반환값 확인 후 응답 값을 지정
@@ -89,7 +96,7 @@ public class MenuCtr {
             return "메뉴이름 등록";
         }
         int result = menuService.deleteMenu(menuDelete);
-        System.out.println(result);
+        //System.out.println(result); 결과값이 들어가면 숫자가 나오고 아니면 0
 
         if(result<=0){
             return "삭제중 오류가 발생됨";
