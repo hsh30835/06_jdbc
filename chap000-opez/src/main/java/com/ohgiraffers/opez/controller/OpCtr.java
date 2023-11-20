@@ -28,11 +28,12 @@ public class OpCtr {
         if(Objects.isNull(opUpdate)){ // 정보자체가 없을 시
             return "정보가 존재하지 않아 입력해야됨";
         }
-        if(opUpdate.getChangeName()==null || opUpdate.getChangeName().equals("")){ // 메뉴이름을 아예 안적을시
-            return "메뉴이름 등록";
+        if(opUpdate.getChangeName()==null || opUpdate.getChangeName().equals("")){
+            return "유저이름 등록";
         }
 
-        int result = opService.modifyMenu(opUpdate);
+        int result = opService.modifyUser(opUpdate);
+        System.out.println(result);
 
         if(result<=0){
             return "수정중 오류가 발생됨";
@@ -49,7 +50,6 @@ public class OpCtr {
             return "유저 이름을 등록해주세요";
         }
 
-        // 유효성 검사가 끝난 메뉴
         int result = opService.registUser(opDTO);
 
         if(result<=0){

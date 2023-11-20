@@ -23,7 +23,7 @@ public class OpService {
         return list;
     }
 
-    public int modifyMenu(OpUpdate opUpdate){ // 수정
+    public int modifyUser(OpUpdate opUpdate){ // 수정
         Connection con = getConnection();
         List<String> userName = opDAO.findAllUserName(con);
 

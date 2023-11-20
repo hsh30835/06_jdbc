@@ -1,6 +1,6 @@
 package com.ohgiraffers.restaurant.model.vo;
 
-public class MenuVo { //VO는 vlaue object //사용자측에 데이터를 전달해줄려고 쓰는거
+public class MenuVo { //VO는 value object //사용자측에 데이터를 전달해줄려고 쓰는거
     private int menuCode; //int 타입의 menuCode 생성
     private String menuName; //String 타입의 menuName 생성
     private int price; //int 타입의 price 생성

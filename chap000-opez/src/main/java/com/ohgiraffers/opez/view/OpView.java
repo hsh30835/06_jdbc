@@ -24,7 +24,7 @@ public class OpView {
                 case 1 : viewUser(opCtr.findAllUser());
                     break;
                 case 2 :
-                    System.out.println(opCtr.modifyUser(modifyMenu()));
+                    System.out.println(opCtr.modifyUser(modifyUser()));
                     break;
                 case 3 :
                     System.out.println(opCtr.registUser(registUser()));
@@ -49,13 +49,13 @@ public class OpView {
         }
     }
 
-    public static OpUpdate modifyMenu(){ //유저 수정하기
+    public static OpUpdate modifyUser(){ //유저 수정하기
         OpUpdate opUpdate = new OpUpdate();
         Scanner scanner = new Scanner(System.in);
         System.out.println("===================");
         System.out.println();
         System.out.print("수정하고 싶은 유저 이름을 입력 : ");
-        opUpdate.setChangeName(scanner.nextLine()); //수정할 메뉴 이름을 입력하기
+        opUpdate.setChangeName(scanner.nextLine());
         System.out.println("변경할 이름 입력 : ");
         opUpdate.setUserName(scanner.nextLine());
         System.out.println("변경할 티어 입력 : ");

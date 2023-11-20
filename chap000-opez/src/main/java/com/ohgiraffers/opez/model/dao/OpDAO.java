@@ -91,7 +91,6 @@ public class OpDAO {
         try {
             stmt = con.prepareStatement(prop.getProperty("updateUser"));
             stmt.setString(3,opUpdate.getChangeName());
-            //5번부터 넣은 이유는 update 쿼리문에서 해당 이름이 같은 조건을 넣어서
             stmt.setString(1,opUpdate.getUserName());
             stmt.setString(2,opUpdate.getUserTier());
 
